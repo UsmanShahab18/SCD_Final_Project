@@ -1,0 +1,438 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFFDD0; /* SCENARIO A: Cream background for a warm, scholarly feel */
+}
+
+header {
+    position: relative; /* Keep header relative */
+    top: 0; left: 0; right: 0;
+    background: #0A2342; /* SCENARIO A: Sophisticated Navy Blue primary background */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow for dark bg */
+    padding: 0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    height: 100px;
+    overflow: visible; /* Allow dropdowns to be visible */
+}
+
+header .logo {
+    font-weight: bolder;
+    font-size: 25px;
+    color: #FFFDD0; /* SCENARIO A: Cream color text/accent on navy background */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .logo .pic {
+    height: 80px;
+    width: auto;
+}
+
+header .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header .navbar ul li {
+    position: relative;
+    width: auto;
+}
+
+header .navbar ul li > a {
+    font-size: 18px;
+    padding: 12px 15px;
+    color: #FFFDD0;
+    display: block;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+header .navbar ul li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    width: 0;
+    height: 2px;
+    background: #B08D57;
+    transition: width 0.3s ease;
+}
+
+header .navbar ul li > a:hover {
+    color: #B08D57;
+    background: rgba(255, 253, 208, 0.1);
+}
+
+header .navbar ul li > a:hover::after {
+    width: calc(100% - 30px);
+}
+
+header .navbar ul li ul { /* Dropdown menu (Desktop) */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 190px; /* Adjusted width */
+    background: #FFFDD0; /* SCENARIO A: Cream background for dropdown */
+    z-index: 999;
+    display: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    border-top: 2px solid #B08D57; /* SCENARIO A: Muted Gold accent for dropdown */
+}
+
+header .navbar ul li ul li {
+    width: 100%;
+    border-top: 1px solid #E8E8E8; /* SCENARIO A: Light Gray separator on cream */
+}
+
+header .navbar ul li ul li:first-child {
+    border-top: none;
+}
+
+header .navbar ul li ul li a {
+    padding: 12px 15px;
+    font-size: 16px;
+    color: #0A2342; /* SCENARIO A: Navy text on cream background for dropdown links */
+}
+
+header .navbar ul li ul li a:hover {
+    background: #E8E8E8; /* SCENARIO A: Light Gray background on hover for dropdown item */
+    color: #B08D57; /* SCENARIO A: Muted Gold text on hover */
+}
+
+header .navbar ul li:focus-within > ul,
+header .navbar ul li:hover > ul {
+    display: block;
+}
+
+#menu-bar { /* Hidden checkbox for mobile menu */
+    display: none;
+    padding-left: 20px;
+}
+
+header label { /* Mobile menu icon (hamburger) */
+    color: #FFFDD0; /* SCENARIO A: Cream color for menu icon on navy header */
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+@media (max-width: 991px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: auto; /* Allow header height to adjust */
+        padding: 15px 7%;
+        flex-wrap: wrap; /* Allow items to wrap if needed */
+    }
+
+    header .logo {
+        font-size: 22px;
+    }
+    header .logo .pic {
+        height: 60px;
+    }
+
+    header label {
+        display: block;
+    }
+
+    .navbar { /* Mobile navigation panel */
+        width: 100%;
+        background: linear-gradient(135deg, #002952 0%, #00478d 100%);
+        /* Changed positioning for mobile to be in normal flow */
+        position: static;
+        top: auto;
+        left: auto;
+        right: auto;
+        z-index: 1;
+        overflow: hidden;
+        max-height: 0; /* Initially hidden */
+        transition: max-height 0.4s ease-out; /* Transition max-height for smooth open/close */
+        /* Removed box-shadow transition here as it's less impactful during height transition */
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Keep shadow when closed */
+    }
+
+    /* When menu is checked, show it by setting a max-height */
+    #menu-bar:checked ~ .navbar {
+        max-height: 500px; /* Set a generous max-height to accommodate all menu items */
+        /* Adjust this value if your menu content is taller */
+    }
+
+
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+
+    .navbar ul li {
+        width: 100%;
+        padding: 0;
+        position: static; /* Keep list items static in mobile flow */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Lighter separator for dark background */
+    }
+    header .navbar ul li:last-child {
+        border-bottom: none;
+    }
+
+    .navbar ul li a {
+        color: #FFFDD0; /* Cream color for links on the dark gradient */
+        padding: 15px 20px;
+        display: block;
+    }
+    .navbar ul li a:hover {
+        background: rgba(255, 255, 255, 0.1); /* Slight transparent white background on hover */
+        color: #B08D57; /* Muted Gold for hover text */
+    }
+
+    header .navbar ul li ul { /* Mobile sub-menu */
+        position: static; /* Keep sub-menu static in mobile flow */
+        width: 100%;
+        background: rgba(0, 0, 0, 0.1); /* Slightly darker transparent background for sub-menu */
+        box-shadow: none;
+        padding-left: 0;
+        display: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.15); /* Lighter separator */
+    }
+     header .navbar ul li:hover > ul {
+        display: block;
+    }
+
+    header .navbar ul li ul li {
+        border-top: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Lighter separator */
+    }
+    header .navbar ul li ul li:last-child {
+        border-bottom: none;
+    }
+
+    header .navbar ul li ul li a {
+        color: #FFFDD0; /* Cream color for sub-menu links */
+        padding: 12px 30px;
+        font-size: 15px;
+    }
+    header .navbar ul li ul li a:hover {
+        background: rgba(255, 255, 255, 0.15); /* Slightly darker transparent background on hover */
+        color: #B08D57; /* Muted Gold for hover text */
+    }
+
+    /* The max-height transition is now controlled by #menu-bar:checked ~ .navbar */
+    /* #menu-bar:checked ~ .navbar {
+        max-height: 100vh;
+    } */
+}
+
+.container{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 1.5;
+}
+
+ul{
+    list-style: none;
+}
+
+/* Footer */
+.footer {
+    background-color: #1a2a4b;
+    color: white;
+    padding: 60px 0 20px 0;
+}
+
+.footer h4 {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #a6c1ee;
+}
+
+.footer ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer ul li {
+    margin-bottom: 12px;
+}
+
+.footer ul li a {
+    color: #d1d9e8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer ul li a:hover {
+    color: white;
+}
+
+.footer-col {
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: #a6c1ee;
+    color: #1a2a4b;
+    transform: translateY(-3px);
+}
+
+.newsletter {
+    margin-top: 20px;
+}
+
+.newsletter h5 {
+    font-size: 1em;
+    margin-bottom: 15px;
+    color: #d1d9e8;
+}
+
+.form-inline {
+    display: flex;
+    gap: 10px;
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 30px;
+    flex-grow: 1;
+}
+
+.form-control::placeholder {
+    color: #d1d9e8;
+    opacity: 0.7;
+}
+
+.btn-subscribe {
+    background-color: #a6c1ee;
+    color: #1a2a4b;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-subscribe:hover {
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #d1d9e8;
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+
+.footer-bottom a {
+    color: #a6c1ee;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-bottom a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .footer-col {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    
+    .form-inline {
+        flex-direction: column;
+    }
+    
+    .btn-subscribe {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .footer-col {
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .footer-col {
+        width: 25%;
+    }
+    
+    /* Assuming you have 4 columns on desktop */
+    .footer-col:first-child {
+        width: 30%;
+    }
+    
+    .footer-col:nth-child(2),
+    .footer-col:nth-child(3) {
+        width: 20%;
+    }
+    
+    .footer-col:last-child {
+        width: 30%;
+    }
+}
